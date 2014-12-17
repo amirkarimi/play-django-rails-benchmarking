@@ -1,0 +1,18 @@
+WSGIPythonPath /var/www/tct_pap_ranje_web/
+WSGIScriptAlias / /var/www/tct_pap_ranje_web/tct_pap_ranje_web/wsgi.py
+<Directory /var/www/tct_pap_ranje_web/tct_pap_ranje_web>
+    <Files wsgi.py>
+        Order deny,allow
+        Require all granted
+    </Files>
+</Directory>
+
+Alias /static /var/www/tct_pap_ranje_web/static
+<Directory /var/www/tct_pap_ranje_web/static>
+    Require all granted
+</Directory>
+
+Alias /media /var/www/tct_pap_ranje_web/media
+<Directory /var/www/tct_pap_ranje_web/media>
+    Require all granted
+</Directory>

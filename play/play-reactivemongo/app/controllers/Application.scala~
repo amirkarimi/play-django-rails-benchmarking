@@ -1,0 +1,36 @@
+package controllers
+
+import play.api._
+import play.api.mvc._
+import reactivemongo.api._
+import scala.concurrent.ExecutionContext.Implicits.global
+
+case class Person(name: String, age: Int)
+
+object Application extends Controller {
+
+  // gets an instance of the driver
+  // (creates an actor system)
+  val driver = new MongoDriver
+  val connection = driver.connection(List("localhost"))
+
+  // Gets a reference to the database "plugin"
+  val db = connection("play-reactivemongo")
+
+  // Gets a reference to the collection "acoll"
+  // By default, you get a BSONCollection.
+  val collection = db("test")  
+
+  def index = Action {
+    val implicit documentHandler = Macros.handler[Person]
+    collection.insert(Person("test", 28)) map { _ =>
+      collection.findOne(BSONDocument("name" -> "test")).cursor[Person].one map { foundPerson =>
+        collection.remove(BSONDocument("name" -> "test")) map { _ =>
+          Ok(views.html.index(foundPerson.toString))
+        }
+      }
+    }
+    
+  }
+
+}

@@ -1,0 +1,13 @@
+@(person: Option[Person])
+
+<html>
+    <body>
+        <h1>Hi</h1>
+        @person.map { person =>
+            Name: @person.name
+            Age: @person.age
+        }.getOrElse {
+            <p>No Person</p>
+        }
+    </body>
+</html>

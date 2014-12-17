@@ -1,0 +1,14 @@
+<html>
+<body>
+<h1>Hi</h1>
+
+{% if person %}
+    <div>
+        Name: {{ person.name }}
+        Age: {{ person.age }}
+    </div>
+{% else %}
+    <div>No person found</div>
+{% endif %}
+
+</body>
