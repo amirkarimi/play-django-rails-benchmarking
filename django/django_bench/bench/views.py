@@ -16,8 +16,4 @@ def index(request):
     
     inserted.delete()
     
-    template = loader.get_template("bench/index.html")
-    context = RequestContext(request, {
-        'person': person,
-    })    
-    return HttpResponse(template.render(context));
+    return HttpResponse("Ok");

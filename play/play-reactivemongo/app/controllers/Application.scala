@@ -28,21 +28,16 @@ object Application extends Controller {
   implicit val documentHandler = Macros.handler[Person]
 
   def index = Action.async {
-    val randInt = rand.nextInt
-    val personName = "test" + randInt
-    val personAge = randInt
-    val id = BSONObjectID.generate
-    
-    collection.insert(Person(id, personName, personAge)) flatMap { _ =>
-      collection.find(BSONDocument("_id" -> id)).one[Person] flatMap { foundPerson =>
-        collection.remove(BSONDocument("_id" -> id)) map { _ =>
-          Ok(views.html.index("Found Person"))
-        }
-      }
+    collection.find(BSONDocument()).cursor[BSONDocument].collect[List]() map { foundPerson =>
+      Ok(foundPerson.map(p => BSONDocument.pretty(p)).mkString(","))
     } recover { case _ =>
       Ok("Faild")
     }
     
+  }
+  
+  def hello = Action {
+    Ok("Hello World")
   }
 
 }

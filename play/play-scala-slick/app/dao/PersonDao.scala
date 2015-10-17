@@ -1,14 +1,15 @@
 package dao
 
-import scala.slick.driver.PostgresDriver.simple._
-import models._
+import models.Person
+import slick.driver.PostgresDriver.api._
 
 object PersonDao {
   
-  lazy val database = Database.forURL("jdbc:postgresql://localhost:5432/play-slick-bench", 
+  lazy val db = Database.forURL("jdbc:postgresql://localhost:5432/play-slick-bench",
                           driver = "org.postgresql.Driver",
                           user = "postgres",
-                          password = "123456")
+                          password = "123456",
+                          keepAliveConnection = true)
 
   class Persons(tag: Tag) extends Table[Person](tag, "persons") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
@@ -20,25 +21,29 @@ object PersonDao {
   
   lazy val persons = TableQuery[Persons]
 
-  def dropAndCreateTable(implicit session: Session) = {
+  def dropAndCreateTable = {
     try {
-        persons.ddl.drop
+        persons.schema.drop
     } catch {
-        case e =>
+        case e: Throwable =>
     }
-    persons.ddl.create
+    persons.schema.create
   }
 
-  def insert(person: Person)(implicit session: Session) = {
-    persons.insert(person)
+  def insert(person: Person) = {
+    db.run(persons += (person))
   }
   
-  def delete(person: Person)(implicit session: Session) = {
-    persons.filter(_.id === person.id).delete
+  def delete(person: Person) = {
+    db.run(persons.filter(_.id === person.id).delete)
   }
 
-  def findFirst(implicit session: Session) = {
-    persons.firstOption
+  def findAll = {
+    db.run(persons.result)
+  }
+
+  def findFirst = {
+    db.run(persons.result.headOption)
   }
 }
 

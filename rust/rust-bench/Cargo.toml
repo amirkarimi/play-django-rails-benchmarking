@@ -1,0 +1,8 @@
+[package]
+
+name = "rust-bench"
+version = "0.0.1"
+authors = ["Amir Karimi <a.karimi.k@gmail.com>"]
+
+[dependencies.iron]
+version = "*"

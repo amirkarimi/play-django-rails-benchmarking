@@ -1,0 +1,43 @@
+cargo:rustc-flags=-L native=/usr/lib/x86_64-linux-gnu
+cargo:rustc-flags=-l ssl
+cargo:rustc-flags=-l crypto
+TARGET = Some("x86_64-unknown-linux-gnu")
+CARGO_MANIFEST_DIR = Some("/home/amir/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-sys-0.5.1")
+OUT_DIR = Some("/home/amir/Projects/draft/benchmarking/rust/rust-bench/target/debug/build/openssl-sys-f4dc33ec05a937b0/out")
+TARGET = Some("x86_64-unknown-linux-gnu")
+OPT_LEVEL = Some("0")
+PROFILE = Some("compile")
+compile 0
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+CC_x86_64-unknown-linux-gnu = None
+CC_x86_64_unknown_linux_gnu = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+CFLAGS_x86_64-unknown-linux-gnu = None
+CFLAGS_x86_64_unknown_linux_gnu = None
+HOST_CFLAGS = None
+CFLAGS = None
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+CC_x86_64-unknown-linux-gnu = None
+CC_x86_64_unknown_linux_gnu = None
+HOST_CC = None
+CC = None
+running: "cc" "-O0" "-c" "-ffunction-sections" "-fdata-sections" "-m64" "-fPIC" "/home/amir/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-sys-0.5.1/src/old_openssl_shim.c" "-o" "/home/amir/Projects/draft/benchmarking/rust/rust-bench/target/debug/build/openssl-sys-f4dc33ec05a937b0/out/src/old_openssl_shim.o"
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+AR_x86_64-unknown-linux-gnu = None
+AR_x86_64_unknown_linux_gnu = None
+HOST_AR = None
+AR = None
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+AR_x86_64-unknown-linux-gnu = None
+AR_x86_64_unknown_linux_gnu = None
+HOST_AR = None
+AR = None
+running: "ar" "crus" "/home/amir/Projects/draft/benchmarking/rust/rust-bench/target/debug/build/openssl-sys-f4dc33ec05a937b0/out/libold_openssl_shim.a" "/home/amir/Projects/draft/benchmarking/rust/rust-bench/target/debug/build/openssl-sys-f4dc33ec05a937b0/out/src/old_openssl_shim.o"
+cargo:rustc-flags=-L native=/home/amir/Projects/draft/benchmarking/rust/rust-bench/target/debug/build/openssl-sys-f4dc33ec05a937b0/out -l static=old_openssl_shim
