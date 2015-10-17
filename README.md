@@ -26,7 +26,7 @@ Django app path: `~/django/django_bench`
 Rails app path: `~/rails/rails_bench` 
 Play app path: `~/play/play-scala-slick` 
 
-## Mongo DB ##
+## Async Data Access ##
 All the above apps are using a blocking library for data access. I wanted to check the impact of using async library for data access. I could implement the same conditions with Scala/Play/ReactiveMongo (As I know them better than the others).
 
 Play/ReactiveMongo app is placed in: `~/play/play-reactivemongo`
